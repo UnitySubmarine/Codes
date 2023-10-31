@@ -19,28 +19,53 @@ public class Button : MonoBehaviour
             if (hit.collider != null)
             {
                 GameObject clickedobject = hit.transform.gameObject;
+                GameObject events = GameObject.Find("Inventory");
                 if (clickedobject.name == "Kitchen")
                 {
-                    SceneManager.LoadScene("kitchen");
+                    if(events.GetComponent<Inventory>().k["KeyforKitchen"] == false) Debug.Log("door to kitchen is locked");
+                    else{
+                        events.GetComponent<Inventory>().visible = true;
+                        events.GetComponent<Inventory>().clicked();
+                        SceneManager.LoadScene("kitchen");
+                    }
                 }
                 if (clickedobject.name == "Cockpit")
                 {
-                    SceneManager.LoadScene("Cockpit");
+                        events.GetComponent<Inventory>().visible = true;
+                        events.GetComponent<Inventory>().clicked();
+                        SceneManager.LoadScene("Cockpit");
+                    
                 }
                 if (clickedobject.name == "Engine")
                 {
-                    SceneManager.LoadScene("Engine");
+                    if(events.GetComponent<Inventory>().k["Flash"] == false) Debug.Log("you cannot go to Engine without light");
+                    else
+                    {
+                        events.GetComponent<Inventory>().visible = true;
+                        events.GetComponent<Inventory>().clicked();
+                        SceneManager.LoadScene("Engine");
+                    }
                 }
                 if (clickedobject.name == "Exit")
                 {
-                    SceneManager.LoadScene("Exit");
+                    if(events.GetComponent<Eventhandler>().Exit == 0) Debug.Log("wait wait");
+                    else
+                    {
+                        events.GetComponent<Inventory>().visible = true;
+                        events.GetComponent<Inventory>().clicked();
+                        SceneManager.LoadScene("Exit");
+                    }
                 }
                 if (clickedobject.name == "Title")
                 {
+                    events.GetComponent<Inventory>().visible = true;
+                    events.GetComponent<Inventory>().clicked();
                     SceneManager.LoadScene("Title");
                 }
                 if (clickedobject.name == "Crew_room")
                 {
+                    events.GetComponent<Inventory>().visible = true;
+                    events.GetComponent<Inventory>().clicked();
                     SceneManager.LoadScene("Crew_room");
                 }
             }

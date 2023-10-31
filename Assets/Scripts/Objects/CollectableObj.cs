@@ -27,6 +27,8 @@ public class CollectableObj : MonoBehaviour
             this.GetComponent<PolygonCollider2D>().enabled = false;
             this.GetComponent<Renderer>().enabled = false;
             Debug.Log("you've got this object - " + this.name);
+            GameObject k = GameObject.Find("Inventory");
+            k.GetComponent<Inventory>().k[this.name] = true;
         }
     }
 }

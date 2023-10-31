@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obj : MonoBehaviour
+public class Inventory_visible : MonoBehaviour
 {
-    public int IsCollectable = 0;
-
+    public static Inventory_visible instance = null;
     void Start()
     {
-
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -22,16 +23,11 @@ public class Obj : MonoBehaviour
                 GameObject clickedobject = hit.transform.gameObject;
                 if (clickedobject.name == this.name)
                 {
-                    if (IsCollectable == 1)
-                    {
-                        Debug.Log("Player got " + clickedobject.name);
-                        clickedobject.GetComponent<CollectableObj>().clicked();
-                    }
-                    else Debug.Log("Player clicked " + clickedobject.name);
+                    GameObject obj;
+                    obj = GameObject.FindWithTag("Inven");
+                    obj.GetComponent<Inventory>().clicked();
                 }
             }
-
-
         }
     }
 }
